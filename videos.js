@@ -1,4 +1,5 @@
-const VIDEO_API = 'http://localhost:3000/api/videos';
+const API_BASE_URL = window.location.origin;
+const VIDEO_API = `${API_BASE_URL}/api/videos`;
 
 const listEl = document.getElementById('video-list');
 const detailEl = document.getElementById('video-detail');

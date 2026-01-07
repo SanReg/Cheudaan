@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/api/curriculum';
+const API_BASE_URL = window.location.origin;
+const API_URL = `${API_BASE_URL}/api/curriculum`;
 const TOKEN = '2737|HHSxop1NRLHUH3rW0Lk1Pr24Re6e8tO1iElBS6Xg6fd828b4';
 
 const chaptersContainer = document.getElementById('chapters');

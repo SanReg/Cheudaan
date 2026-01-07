@@ -1,4 +1,5 @@
-const NOTES_API = 'http://localhost:3000/api/notes';
+const API_BASE_URL = window.location.origin;
+const NOTES_API = `${API_BASE_URL}/api/notes`;
 
 const listEl = document.getElementById('notes-list');
 const detailEl = document.getElementById('notes-detail');

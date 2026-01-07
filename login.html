@@ -192,7 +192,7 @@
       const courseId = courseIdInput.value;
 
       try {
-        const response = await fetch('http://localhost:3000/api/verify-password', {
+        const response = await fetch(`${window.location.origin}/api/verify-password`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
