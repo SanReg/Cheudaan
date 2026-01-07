@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Combo Syllabus Explorer</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="auth.js"></script>
+</head>
+<body class="syllabus-page">
+  <div class="page">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Cheudaan Academy</p>
+        <h1 class="title">Combo Syllabus Explorer</h1>
+        <p class="subtitle">Browse chapters and drill into units with live data from the API.</p>
+      </div>
+      <div class="actions">
+        <div class="search-group">
+          <input id="search" type="search" placeholder="Search chapters or units" aria-label="Search syllabus" />
+          <span class="kbd">Ctrl + F</span>
+        </div>
+        <a class="nav-link" href="videos.html">Videos</a>
+        <a class="nav-link" href="notes.html">Notes</a>
+        <button id="reload" class="ghost">Reload</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Chapters</h2>
+          <p id="status" class="status">Ready.</p>
+        </div>
+        <div id="chapters" class="chapters"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

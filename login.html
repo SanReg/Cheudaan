@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Cheudaan Academy</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Space Grotesk', sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.25), transparent 35%),
+                  radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.18), transparent 40%),
+                  linear-gradient(160deg, #0b1022, #0f172a 45%, #0b1022);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e2e8f0;
+      padding: 24px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 48px 32px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .login-header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      background: linear-gradient(135deg, #7c3aed, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-header p {
+      margin: 0;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #e2e8f0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    input[type="password"]:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #7c3aed;
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+    }
+
+    input[type="password"]::placeholder {
+      color: #64748b;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #7c3aed, #22d3ee);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 8px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .error-message {
+      display: none;
+      padding: 12px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      color: #fca5a5;
+      font-size: 13px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .info-text {
+      text-align: center;
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>🎓 Cheudaan Academy</h1>
+      <p>Enter password to continue</p>
+    </div>
+
+    <div class="error-message" id="error-msg"></div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label for="course-id">Course ID</label>
+        <input 
+          type="number" 
+          id="course-id" 
+          placeholder="Enter course ID" 
+          value="113"
+          required 
+        >
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          placeholder="Enter password" 
+          required 
+          autocomplete="off"
+        >
+      </div>
+      <button type="submit" class="login-btn">Access Platform</button>
+    </form>
+
+    <p class="info-text">You'll only need to enter this once</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('login-form');
+    const courseIdInput = document.getElementById('course-id');
+    const passwordInput = document.getElementById('password');
+    const errorMsg = document.getElementById('error-msg');
+
+    // Check if already authenticated
+    if (localStorage.getItem('cheudaan_auth') === 'true') {
+      window.location.href = 'index.html';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const password = passwordInput.value;
+      const courseId = courseIdInput.value;
+
+      try {
+        const response = await fetch('http://localhost:3000/api/verify-password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ password }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          localStorage.setItem('cheudaan_auth', 'true');
+          localStorage.setItem('cheudaan_token', btoa(password + Date.now()));
+          localStorage.setItem('cheudaan_course_id', courseId);
+          window.location.href = 'index.html';
+        } else {
+          showError('Incorrect password');
+          passwordInput.value = '';
+          passwordInput.focus();
+        }
+      } catch (error) {
+        console.error('Auth error:', error);
+        showError('Connection error. Please try again.');
+      }
+    });
+
+    function showError(message) {
+      errorMsg.textContent = message;
+      errorMsg.classList.add('show');
+      setTimeout(() => {
+        errorMsg.classList.remove('show');
+      }, 4000);
+    }
+
+    passwordInput.focus();
+  </script>
+</body>
+</html>

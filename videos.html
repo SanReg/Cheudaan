@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Combo Course Videos</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="auth.js"></script>
+</head>
+<body class="videos-page">
+  <div class="page">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Cheudaan Academy</p>
+        <h1 class="title">Course Videos</h1>
+        <p class="subtitle">All videos from the course, watchable inline.</p>
+      </div>
+      <div class="actions">
+        <a class="nav-link" href="index.html">Back to Syllabus</a>
+        <a class="nav-link" href="notes.html">Notes</a>
+        <button id="reload-videos" class="ghost">Reload</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Video List</h2>
+          <p id="status" class="status">Ready.</p>
+        </div>
+        <div id="video-list" class="list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="videos.js"></script>
+</body>
+</html>
