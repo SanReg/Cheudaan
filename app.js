@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,8 @@ const APP_PASSWORD = process.env.PASSWORD || 'cheudaan123';
 // Middleware
 app.use(cors());
 app.use(express.json());
+// Serve static files from the current directory
+app.use(express.static(path.join(__dirname)));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
